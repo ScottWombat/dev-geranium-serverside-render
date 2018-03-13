@@ -1,0 +1,13 @@
+{
+  "app.to_get_started": "Pour commencer, modifier {filename} et enregistrer pour recharger.",
+  "app.welcome": "Welcome to React>>>>",
+  "app.logo": "Wild Geranium",
+  "app.slogan": "The Scent",
+  "app.lady.link": "Lady",
+  "app.gentleman.link": "Gentleman",
+  "app.login.menu": "Login",
+  "app.wishlist.menu": "Wishlist",
+  "app.mycart.menu": "My Cart",
+  "app.contact.menu": "Contact",
+  "app.about.menu": "About"
+}

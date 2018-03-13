@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wild Geranium</title>
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="static/ico/favicon.ico" rel="icon" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="static/css/import_fonts.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/canvas.css" />
+
+  
+
+</head>
+<body>
+    <noscript>		
+        Please enable javascript for this page		
+    </noscript>
+    <div id='app' class='app'>{{SSR}}</div>
+    <script>
+        window.__REDUX_STATE__ = "{{data}}"
+    </script>
+   
+     <div id='canvas-wrapper'>
+        <div class='canvas-wrapper'>
+            <canvas id='app-canvas' width='1080px'></canvas>
+        </div>
+    </div>
+<script type="text/javascript" src="static/initMood.js"></script>
+
+</body>
+</html>

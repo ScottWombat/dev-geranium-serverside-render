@@ -1,0 +1,13 @@
+{
+  "app.to_get_started": "Pour commencer, modifier {filename} et enregistrer pour recharger.",
+  "app.welcome": "リアクションへようこそ",
+  "app.logo": "魅了された",
+  "app.lady.link": "レディ",
+  "app.gentleman.link": "紳士",
+  "app.login.menu": "ログイン",
+  "app.wishlist.menu": "ウィッシュリスト",
+  "app.mycart.menu": "私のカート",
+  "app.contact.menu": "接触",
+  "app.about.menu": "約"
+
+}

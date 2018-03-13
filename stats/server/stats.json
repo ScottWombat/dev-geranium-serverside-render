@@ -1,0 +1,8 @@
+{
+  "assetsByChunkName": {
+    "app": [
+      "server.js",
+      "server.js.map"
+    ]
+  }
+}

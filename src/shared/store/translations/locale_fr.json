@@ -1,0 +1,12 @@
+{
+  "app.to_get_started": "Pour commencer, modifier {filename} et enregistrer pour recharger.",
+  "app.welcome": "Bienvenue à React",
+  "app.logo": "Obsédé",
+  "app.lady.link": "Dame",
+  "app.gentleman.link": "Gentilhomme",
+  "app.login.menu": "S'identifier",
+  "app.wishlist.menu": "Liste de Souhaits",
+  "app.mycart.menu": "Mon Panier",
+  "app.contact.menu": "Contact",
+  "app.about.menu": "Sur"
+}

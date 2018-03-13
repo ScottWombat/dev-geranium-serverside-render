@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link href="static/ico/favicon.ico" rel="icon" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="static/css/import_fonts.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/canvas.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/intro.css" />
+  
+</head>
+<body>
+     <noscript>		
+      Please enable javascript for this page		
+    </noscript>
+    <div id="root">{{SSR}}</div>
+    <script>
+    window.__INITIAL_STATE__ = "{{data}}"
+    </script>
+
+    <div class='style2'>Wild Geranium</div>
+   
+       <div id='canvas-wrapper'>
+        <div class='canvas-wrapper'>
+            <canvas id='app-canvas' width='1080px'></canvas>
+        </div>
+    </div>
+<script type="text/javascript" src="static/js/initMood.js"></script>
+</body>
+</html>
