@@ -2,8 +2,17 @@ import express from 'express'
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import path from 'path';
-import index from './router';
-import universalLoader from './universal';
+import timestamp from 'console-timestamp';
+
+import configureStore from '../shared/store/configureStore'
+import { matchRoutes } from 'react-router-config';
+import renderer from './renderer'
+import Routes from '../shared/routesConfig';
+
+import getProductList from '../shared/store/retrieveProduct/retrieveProductAction';
+
+import {pageNoChanged} from '../shared/store/pageNoChanged/pageNoAction';
+
 
 const PORT = process.env.PORT || 3000;
 const app = express()
@@ -31,27 +40,48 @@ app.use((req, res, next) =>{
 //app.use(morgan(':id :method :url :response-time'))
 
 
-app.get('/dummy', (req, res) => {
-  res.send('hello, world111!')
+//app.get('/dummy', (req, res) => {
+//  res.send('hello, world111!')
 
-})//
+//})
 
-app.use('/', index)
-app.use('/', universalLoader)
-
-/*
-app.get('/', (req, res) => {
-   
-   res.sendFile(path.join(__dirname + '/../index.html'));
+app.get('*', (req, res) => {
+  let now = new Date();
+  console.log(timestamp('MM-DD hh:mm', now));
     
-  logger.info("Response time: "+ res.get('X-Response-Time'));
-})
-*/
+  const store = configureStore({},true);
+    
+    
+    
+  const promises = matchRoutes(Routes, req.path)
+    .map(({ route }) => {
+      return route.loadData ? route.loadData(store) : null;
+    })
+    .map(promise => {
+      if (promise) {
+        return new Promise((resolve, reject) => {
+          promise.then(resolve).catch(resolve);
+        });
+      }
+    });
 
-app.all('*', (req, res, next) => {
-     //console.log(process.cwd() + '\\index.html')
-     res.sendFile(process.cwd() + '/index.html');
-})
+  Promise.all(promises).then(() => {
+    const context = {};
+    
+    const content = renderer(req, store, context);
+
+    if (context.url) {
+      return res.redirect(301, context.url);
+    }
+    if (context.notFound) {
+      res.status(404);
+    }
+
+    res.send(content);
+  });
+});
+
+
 
 // Let's rock
 app.listen(PORT, () => {

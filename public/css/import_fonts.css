@@ -1,4 +1,11 @@
 @font-face {
+            font-family: 'FontAwesome_Regular';
+            src: url('/static/fonts/FontAwesome/webfonts/fa-regular-400.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+}
+
+@font-face {
             font-family: 'Booster';
             src: url('/static/fonts/Booster/Booster.otf');
             src: url('/static/fonts/Booster/Booster.ttf') format('truetype');
@@ -12,8 +19,8 @@
 
 @font-face {
     font-family: 'Higher';
-    src: url('/static/fonts//Higher/Higher.ttf') format('truetype');
-    src: url('/static/fonts//Higher/Higher.otf') format('truetype');
+    src: url('/static/fonts/Higher/Higher.ttf') format('truetype');
+    src: url('/static/fonts/Higher/Higher.otf') format('truetype');
 }
 
 @font-face {

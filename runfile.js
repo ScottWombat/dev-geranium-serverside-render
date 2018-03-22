@@ -36,10 +36,16 @@ function buildProd1(){
 }
 
 function buildProd(){
-    run('rm -f ./index.html')
+    //run('rm -f ./index.html')
     //compile prod client
-    run('webpack --config webpack.prod.config.client.js --progress --profile --mode production')
-    run('webpack --config webpack.prod.config.server.js --progress --profile --mode production')
+    run('webpack --config webpack.prod.config.client.js --mode production')
+    run('webpack --config webpack.prod.config.server.js --mode production')
+    run('mkdir dist')
+    run('cp -rf ./public dist')
+   run('cp -f ./build/index.html dist')
+    run('cp -f ./build/server.js dist')
+    run('cp -rf ./build/compiled dist/public')
+   
 }
 module.exports={
    runDev,

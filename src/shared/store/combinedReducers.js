@@ -1,13 +1,13 @@
 import {combineReducers} from 'redux';
 
-import countryReducer from './reducers/countryReducer';
-import localeReducer from './reducers/localeReducer';
-import pageNoReducer from './reducers/pageNoReducer';
-import addItemToCart from './reducers/addItemToCartReducer';
-import initialiseRecordsPerPageReducer from './reducers/initialiseRecordsPerPageReducer';
-import retrieveProductReducer from './reducers/retrieveProductReducer';
-import changeImageSourceReducer from './reducers/changeImageSourceReducer';
-import purchaseReducer from './reducers/purchaseReducer';
+import countryReducer from './country/countryReducer';
+import localeReducer from './localization/localeReducer';
+import pageNoReducer from './pageNoChanged/pageNoReducer';
+import addItemToCart from './addItemToCart/addItemToCartReducer';
+import initialiseRecordsPerPageReducer from './recordsPerPage/initialiseRecordsPerPageReducer';
+import retrieveProductReducer from './retrieveProduct/retrieveProductReducer';
+import changeImageSourceReducer from './changeImageSource/changeImageSourceReducer';
+import purchaseReducer from './purchase/purchaseReducer';
 
 
 const rootReducer = combineReducers({

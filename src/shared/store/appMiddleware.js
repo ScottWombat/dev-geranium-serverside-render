@@ -1,4 +1,4 @@
-import {WOMEN_PRODUCTS_RETRIEVAL,MEN_PRODUCTS_RETRIEVAL,ADD_TO_CART} from '../actionTypes';
+import {WOMEN_PRODUCTS_RETRIEVAL,MEN_PRODUCTS_RETRIEVAL,ADD_TO_CART} from './actionTypes';
 
 export const appMiddleware = (store) => (next) => (action) => {
     

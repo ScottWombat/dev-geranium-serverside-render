@@ -6,44 +6,40 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const extractCSS = new ExtractTextPlugin({
+    allChunks: true,
     filename: '[name]_[hash:8].bundle.css',
-   
+    disable: process.env.NODE_ENV === "development"
 });
 
-require('dotenv').config();
+//require('dotenv').config();
 
 module.exports = [
 	{
 		name: 'Wild Geranium',
-		target: 'node',
+		target: 'web',
 		entry: {
             app : ['./src/client/browser.js']
-            
         },
         output: {
-            path: path.join(__dirname, './build'),
+            path: path.join(__dirname, './build/compiled'),
             filename: "[name]_[hash:8].bundle.js",
-            publicPath: '/static'
+            publicPath: '/static/compiled'
 		},
-       optimization: {
-		splitChunks: {
-			cacheGroups: {
-				commons: {
-					chunks: "initial",
-					minChunks: 2,
-					maxInitialRequests: 5, // The default limit is too small to showcase the effect
-					minSize: 0 // This is example is too small to create commons chunks
-				},
-				vendor: {
-					test: /node_modules/,
-					chunks: "initial",
-					name: "vendor",
-					priority: 10,
-					enforce: true
-				}
-			}
-		}
-	},
+        optimization: {
+        runtimeChunk: {
+            name: "manifest"
+        },
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: "vendors",
+                    priority: -20,
+                    chunks: "all"
+                }
+            }
+        }
+   },
         performance: {
             hints: false
         },
@@ -51,7 +47,6 @@ module.exports = [
             modules: [path.resolve(), 'node_modules', 'src'],
 			extensions: ['.js', '.jsx']
 		},
-        devtool: 'source-map',
 		module: {
 			rules: [
 				{
@@ -64,26 +59,40 @@ module.exports = [
 					]
 				},
                 {//regular css files
-                        test: /\.css$/,
+                        test: /\.(css|scss)$/,
+                        exclude: /node_modules/,
                         use: extractCSS.extract({
+                            // use style-loader in development
                             fallback: 'style-loader',
                             use: [
-                                 {loader: 'css-loader'},
+                                 {loader: 'css-loader',options: { minimize: true }},
                                  {loader: 'postcss-loader',
                                             options: {
                                                 plugins: (loader) => [
-                                                    require('autoprefixer')({browsers: ['last 2 versions','last 2 Chrome versions','ie >= 10','Firefox > 20','safari 5','safari 5']}),
+                                                    require('autoprefixer')({
+                                                    browsers: ['last 3 versions', '> 1%']
+                                                    })
                                                 ]
                                             }
+                                 },
+                                 {
+                                    // Loads a SASS/SCSS file and compiles it to CSS
+                                    loader: 'sass-loader'
                                  }
                             ]
                         })
                 },
+                
                 {
                 test: /\.(jpg|png|gif|pdf|ico)$/,
                 use: [
                     {
-                        loader: 'url-loader'
+                        loader: 'url-loader',
+                        options: {
+                           // Images larger than 10 KB won’t be inlined
+                          limit: 10 * 1024,
+                            name: "/assets/[hash].[ext]"
+                          }
                     },
                 ]
                 },
@@ -91,7 +100,8 @@ module.exports = [
                 test: /.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
                 use: [{
                     loader: 'file-loader',
-                }]
+                    
+                    }]
                 },
                 {
                 test: /\.(svg)$/,
@@ -114,13 +124,13 @@ module.exports = [
                 sourceMap: true
             }),
             new HtmlWebpackPlugin({
-            template: "./htmlTemplate/template.html",
+            template: "./htmlTemplate/template.min.html",
             filename: "../index.html"
             }),
             new StatsWriterPlugin({
-            filename: "../stats/stats_client.json" // Default
+            filename: "../../stats/client/stats.json" // Default
             }),
-            new CleanWebpackPlugin(['build','stats'])
+            new CleanWebpackPlugin(['build','dist','stats'])
 		]
 	}
 	
